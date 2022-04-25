@@ -1,0 +1,78 @@
+Kirils Ivandes
+123456-12345
+12/34/5678
+Denis Kozlovs
+170805-22707
+17/08/2005
+
+Case 1
+24/04/2022
+19:42:00
+Mego
+Kirils Ivandes
+123456-12345
+12/34/5678
+Ukral
+Case 2
+25/04/2022
+20:42:00
+Maxima
+Denis Kozlovs
+170805-22707
+17/08/2005
+Stole
+Case 3
+25/04/2022
+20:42:00
+Maxima
+Kirils Ivandes
+123456-12345
+12/34/5678
+Stole
+
+
+Case 1
+24/04/2022
+19:42:00
+Mego
+Kirils Ivandes
+123456-12345
+12/34/5678
+20/04/2023
+20/04/2024
+1 year
+1 year sad
+Case 2
+25/04/2022
+20:42:00
+Rimi
+Deniss Kozlovs
+170805-22707
+170805-22707
+10/01/2022
+20/01/2022
+10 days
+Za rofli
+Case 3
+25/04/2022
+20:42:00
+Maxima
+Kirils Ivandes
+123456-12345
+12/34/5678
+30/04/2022
+30/04/2024
+2 years
+Sad
+Case 4
+25/04/2022
+20:42:00
+Maxima
+Kirils Ivandes
+123456-12345
+12/34/5678
+30/04/2022
+30/04/2024
+2 years
+Sad
+
