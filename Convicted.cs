@@ -5,7 +5,7 @@ using System.Linq;
 class Convicted{
   public static string path = "convicted.txt";
 
-  static string[] titles = {"Convicted name:","Personal code:","Date of birth:"};
+  public static string[] titles = {"Convicted name:","Personal code:","Date of birth:"};
   
   public static void AddData(){
     string Name;
@@ -54,7 +54,9 @@ class Convicted{
 
       using(StreamWriter writetext = new StreamWriter(path, true))
       {
-        writetext.WriteLine($"\n{Name} {SecondName}\n{PersonCode}\n{BirthDate}");
+        writetext.WriteLine($"{Name} {SecondName}");
+        writetext.WriteLine(PersonCode);
+        writetext.WriteLine(BirthDate);
       }
     }
     
@@ -73,7 +75,7 @@ class Convicted{
     for(int i = 0; i < readText.Length; i+=3)
     {
         
-        Console.WriteLine($"- {counterPrint} - {readText[i]}");
+        Console.WriteLine($"- {counterPrint} - {readText[i]} - {readText[i + 1]}");
         counterPrint++;
     }
     Console.WriteLine ("=======================================");
@@ -94,7 +96,8 @@ class Convicted{
       for(int i = choice; i < choice + 3; i++)
       {
           
-          Console.WriteLine($"- | {titles[i]} {readText[i]}");
+          Console.WriteLine($"- | {titles[counterPrint]} {readText[i]}");
+          counterPrint++;
       }
       Console.WriteLine ("=======================================");
     }
@@ -227,14 +230,15 @@ class Convicted{
       int ReadTextLength = counter;
       
       while(ReadTextLength > 0){
-        ReadTextLength = ReadTextLength - 3;
-        Console.WriteLine(ReadTextLength);
+        
         if(ReadTextLength >= 0 && ReadTextLength <= 2){
           break;
         }
+        ReadTextLength = ReadTextLength - 3;
       }
       
-  
+      int counterPrint = 0;
+      
       string readLine = counter.ToString();
       using (StreamReader sr = new StreamReader(path))
       {
@@ -246,7 +250,8 @@ class Convicted{
             
             for(int n = -i; n < 3 - ReadTextLength; n++){
               
-              Console.WriteLine(lines[counter + n]);
+              Console.WriteLine($" - | {titles[counterPrint]} {lines[counter + n]}");
+              counterPrint++;
             }
             
           }
@@ -324,10 +329,12 @@ class Convicted{
           }
           break;
         case 3:
+          Console.Clear();
           Judical.Sort();
           break;
 
         default:
+          Console.Clear();
           Sort();
           break;
 

@@ -63,6 +63,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         AddData();
         break;
 
@@ -126,6 +127,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         ViewData();
         break;
     }
@@ -190,6 +192,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         DeleteData();
         break;
 
@@ -254,6 +257,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         SearchData();
         break;
 
@@ -290,17 +294,23 @@ class Judical
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
     Console.WriteLine ("---------------------------------------");
-    Console.WriteLine ("Summary:");
+    Console.WriteLine ("Number of objects:");
     
     Console.WriteLine ($"- | - Convicted - ({ConvictedCounter})");
     Console.WriteLine ($"- | - Case - ({CaseCounter})");
     Console.WriteLine ($"- | - Sentence - ({SentenceCounter}) ");
-    Console.WriteLine ($"- | - Summary in all files - ({SumObjectsNum}) ");
+    Console.WriteLine ($"- | - Total objects in all files - ({SumObjectsNum}) ");
 
     Console.WriteLine ("=======================================");
     Console.Write("Enter: ");
     Console.ReadKey();
     Console.Clear();
+    if(LoginPass.Roots == 1){
+      MainMenu();
+    }
+    else{
+      UserMainMenu();
+    }
     
   }
   ////////////////////////////////////////////////////
@@ -356,6 +366,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         Sort();
         break;
 
@@ -368,7 +379,108 @@ class Judical
   }
 /////////////////////////////////////////////////////
   public static void Summary(){
-    
+    Console.WriteLine ("=======================================");
+    Console.WriteLine ("---------------------------------------");
+    Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
+    Console.WriteLine ("---------------------------------------");
+    Console.WriteLine ($"Summary({Case.path}):");
+
+    string[] readTextConvicted = File.ReadAllLines(Convicted.path);
+    string[] readTextCase = File.ReadAllLines(Case.path);
+    string[] readTextSentence = File.ReadAllLines(Sentence.path);
+    int counterPrint = 1;
+
+    for(int i = 0; i < readTextCase.Length; i+=8)
+    {
+        
+        Console.WriteLine($"- {counterPrint} - {readTextCase[i]}");
+        counterPrint++;
+    }
+    Console.WriteLine ("=======================================");
+    Console.Write("Enter(Press ENTERN to return): ");
+    try{
+      int choice = Convert.ToInt32(Console.ReadLine());
+      choice = NumberRewriter(choice,8)-1;
+
+      Console.Clear();
+      
+      Console.WriteLine ("=======================================");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ($"Summary({readTextCase[choice]} - {Case.path}):");
+/////////////////////////
+      Console.WriteLine ($"Сonvicted:");
+
+      counterPrint = 0;
+      
+      for(int i = choice + 4; i < choice + 7; i++)
+      {
+          
+        Console.WriteLine($"- | {Convicted.titles[counterPrint]} {readTextCase[i]}");
+        counterPrint++;
+      }
+
+      counterPrint = 0;
+///////////////////////////
+      Console.WriteLine ($"Case:");
+      
+      for(int i = choice; i < choice + 8; i++)
+      {
+        if(i >= choice + 4 && i <= choice + 6){
+          i+=3;
+          counterPrint+=3;
+        }
+        Console.WriteLine($"- | {Case.titles[counterPrint]} {readTextCase[i]}");
+        counterPrint++;
+      }
+//////////////////////////
+      Console.WriteLine ($"Sentence:");
+      counterPrint = 0;
+      int counter = 0;
+      string line;
+      string text = readTextCase[choice];
+      System.IO.StreamReader file = new System.IO.StreamReader(Sentence.path);
+        
+      while ((line = file.ReadLine()) != null)
+      {
+          if (line.Contains(text))
+          {
+            break;
+          }
+        counter = counter + 1 ;
+      }      
+      
+      for(int i = counter; i < counter + 11; i++)
+      {
+        if(i >= counter + 1 && i <= counter + 6){
+          i+=6;
+          counterPrint+=6;
+        }
+        Console.WriteLine($"- | {Sentence.titles[counterPrint]} {readTextSentence[i]}");
+        counterPrint++;
+      }
+
+      Console.WriteLine ("=======================================");
+      Console.WriteLine ("Enter:");
+    }
+    catch{
+      Console.Clear();
+      if(LoginPass.Roots == 1){
+        MainMenu();
+      }
+      else{
+        UserMainMenu();
+      }
+    }
+    Console.ReadKey();
+    Console.Clear();
+    if(LoginPass.Roots == 1){
+      MainMenu();
+    }
+    else{
+      UserMainMenu();
+    }
   }
 ////////////////////////////////////////////////////
   public static void UserInfo(){
@@ -381,7 +493,6 @@ class Judical
     Console.WriteLine ("- 2 - Change access");
     Console.WriteLine ("- 3 - Delete user");
     Console.WriteLine ("- 4 - Back");
-    Console.WriteLine ("- 5 - Exit");
     Console.WriteLine ("=======================================");
     Console.Write("Enter: ");
 
@@ -413,13 +524,9 @@ class Judical
             UserMainMenu();
           }
           break;
-          
-        case 5:
-          Console.Clear();
-          Environment.Exit(0);
-          break;
   
         default:
+          Console.Clear();
           UserInfo();
           break;
   
@@ -447,7 +554,7 @@ class Judical
     Console.WriteLine ("- 4 - Search data");
     Console.WriteLine ("- 5 - Sort");
     Console.WriteLine ("- 6 - Summary");
-    Console.WriteLine ("- 7 - Objects Sum");
+    Console.WriteLine ("- 7 - Number of objects");
     Console.WriteLine ("- 8 - User info");
     Console.WriteLine ("- 9 - Exit ");
     Console.WriteLine ("=======================================");
@@ -515,6 +622,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         MainMenu();
         break;
     }
@@ -576,6 +684,7 @@ class Judical
         break;
 
       default:
+        Console.Clear();
         UserMainMenu();
         break;
 

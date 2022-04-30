@@ -5,7 +5,7 @@ using System.Linq;
 class Sentence{
   public static string path = "sentence.txt";
 
-  static string[] titles = {"Case name:","Date:","Time:","Place:","Convicted name:","Personal code:","Date of birth:","Start of Sentence:","End of sentence:","Term:","Sentence text:"};
+  public static string[] titles = {"Case name:","Date:","Time:","Place:","Convicted name:","Personal code:","Date of birth:","Start of Sentence:","End of sentence:","Term:","Sentence text:"};
   
   public static void AddData(){
     Console.WriteLine ("=======================================");
@@ -27,60 +27,67 @@ class Sentence{
     }
     Console.WriteLine ("=======================================");
     Console.Write ("Choose case:");
-    int choosedLine = Convert.ToInt32(Console.ReadLine());
-    choosedLine = Judical.NumberRewriter(choosedLine,8);
-
-    string text = readTextConvicted[choosedLine-1];
-    int found = 0;
-      
-    System.IO.StreamReader file = new System.IO.StreamReader(path);
-      
-    while ((line = file.ReadLine()) != null)
-    {
+    try{
+      int choosedLine = Convert.ToInt32(Console.ReadLine());
+      choosedLine = Judical.NumberRewriter(choosedLine,8);
+  
+      string text = readTextConvicted[choosedLine-1];
+      int found = 0;
         
-        if (line.Contains(text))
-        {
-          found = found +1;
-          break;
-        }
-      counter = counter + 1 ;
-
-      
-          
-    }
-    if(found == 1){
-      Console.WriteLine("Sentence for this case is already exist");
-      Console.Write("Enter: ");
-      Console.ReadKey();
-      Console.Clear();
-      AddData();
-    }
-    else{
-
-      Console.Write ("\nStart of sentence:");
-      string StartSentence = Console.ReadLine();
-      
-      Console.Write ("\nEnd of sentence:");
-      string EndSentence = Console.ReadLine();
-  
-      Console.Write ("\nTerm:");
-      string term = Console.ReadLine();
-      
-      Console.Write ("\nSentence:");
-      string sentence = Console.ReadLine();
-      using(StreamWriter writetext = new StreamWriter(path, true))
+      System.IO.StreamReader file = new System.IO.StreamReader(path);
+        
+      while ((line = file.ReadLine()) != null)
       {
+          
+          if (line.Contains(text))
+          {
+            found = found +1;
+            break;
+          }
+        counter = counter + 1 ;
   
-        for(int i = choosedLine; i < choosedLine + 7; i++){
-            writetext.WriteLine(readTextConvicted[i-1]);
+        
+            
+      }
+      if(found == 1){
+        Console.WriteLine("Sentence for this case is already exist");
+        Console.Write("Enter: ");
+        Console.ReadKey();
+        Console.Clear();
+        AddData();
+      }
+      else{
+  
+        Console.Write ("\nStart of sentence:");
+        string StartSentence = Console.ReadLine();
+        
+        Console.Write ("\nEnd of sentence:");
+        string EndSentence = Console.ReadLine();
+    
+        Console.Write ("\nTerm:");
+        string term = Console.ReadLine();
+        
+        Console.Write ("\nSentence:");
+        string sentence = Console.ReadLine();
+        using(StreamWriter writetext = new StreamWriter(path, true))
+        {
+    
+          for(int i = choosedLine; i < choosedLine + 7; i++){
+              writetext.WriteLine(readTextConvicted[i-1]);
+          }
+          writetext.WriteLine(StartSentence);
+          writetext.WriteLine(EndSentence);
+          writetext.WriteLine(term);
+          writetext.WriteLine(sentence);
+    
         }
-        writetext.WriteLine(StartSentence);
-        writetext.WriteLine(EndSentence);
-        writetext.WriteLine(term);
-        writetext.WriteLine(sentence);
-  
       }
     }
+    catch{
+      Console.Clear();
+      Judical.AddData();
+    }
+
   }
 
   public static void ViewData(){
@@ -99,6 +106,8 @@ class Sentence{
         counterPrint++;
     }
     Console.WriteLine ("=======================================");
+
+    counterPrint = 0;
     try{
       int choice = Convert.ToInt32(Console.ReadLine());
       choice = Judical.NumberRewriter(choice,11)-1;
@@ -113,7 +122,8 @@ class Sentence{
       for(int i = choice; i < choice + 11; i++)
       {
           
-          Console.WriteLine($"- | {titles[i]} {readText[i]}");
+        Console.WriteLine($"- | {titles[counterPrint]} {readText[i]}");
+        counterPrint++;
       }
       Console.WriteLine ("=======================================");
     }
@@ -184,14 +194,13 @@ class Sentence{
       int checker = counter;
       
       while(checker > 0){
-        checker = checker - 11;
-        Console.WriteLine(checker);
         if(checker >= 0 && checker <= 10){
           break;
         }
+        checker = checker - 11;
       }
       
-  
+      int counterPrint = 0;
       string readLine = counter.ToString();
       using (StreamReader sr = new StreamReader(path))
       {
@@ -203,7 +212,8 @@ class Sentence{
             
             for(int n = -i; n < 11 - checker; n++){
               
-              Console.WriteLine(lines[counter + n]);
+              Console.WriteLine($" - | {titles[counterPrint]} {lines[counter + n]}");
+              counterPrint++;
             }
             
           }
@@ -281,10 +291,12 @@ class Sentence{
           }
           break;
         case 3:
+          Console.Clear();
           Judical.Sort();
           break;
 
         default:
+          Console.Clear();
           Sort();
           break;
       }

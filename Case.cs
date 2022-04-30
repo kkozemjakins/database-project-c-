@@ -5,7 +5,7 @@ using System.Linq;
 class Case{
   public static string path = "case.txt";
 
-  static string[] titles = {"Case name:","Date:","Time:","Place:","Convicted name:","Personal code:","Date of birth:","Case text:"};
+  public static string[] titles = {"Case name:","Date:","Time:","Place:","Convicted name:","Personal code:","Date of birth:","Case text:"};
   
   public static void AddData(){
     Console.WriteLine ("=======================================");
@@ -118,7 +118,7 @@ class Case{
     Console.WriteLine ("=======================================");
     
     Console.Write("Enter: ");
-    
+    counterPrint = 0;
     try{
       int choice = Convert.ToInt32(Console.ReadLine());
       choice = Judical.NumberRewriter(choice,8)-1;
@@ -133,7 +133,8 @@ class Case{
       for(int i = choice; i < choice + 8; i++)
       {
           
-          Console.WriteLine($"- | {titles[i]} {readText[i]}");
+        Console.WriteLine($"- | {titles[counterPrint]} {readText[i]}");
+        counterPrint++;
       }
       Console.WriteLine ("=======================================");
     }
@@ -167,14 +168,13 @@ class Case{
       int checker = counter;
       
       while(checker > 0){
-        checker = checker - 8;
-        Console.WriteLine(checker);
         if(checker >= 0 && checker <= 7){
           break;
         }
+        checker = checker - 8;
       }
       
-  
+      int counterPrint = 0;
       string readLine = counter.ToString();
       using (StreamReader sr = new StreamReader(path))
       {
@@ -186,7 +186,8 @@ class Case{
             
             for(int n = -i; n < 8 - checker; n++){
               
-              Console.WriteLine(lines[counter + n]);
+              Console.WriteLine($" - | {titles[counterPrint]} {lines[counter + n]}");
+              counterPrint++;
             }
             
           }
@@ -330,10 +331,12 @@ class Case{
           }
           break;
         case 3:
+          Console.Clear();
           Judical.Sort();
           break;
 
         default:
+          Console.Clear();
           Sort();
           break;
 

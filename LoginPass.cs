@@ -66,6 +66,10 @@ class LoginPass{
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ($"Change access({path}):");
+    Console.WriteLine ("------------");
+    Console.WriteLine ("|0 - User  |");
+    Console.WriteLine ("|1 - Admin |");
+    Console.WriteLine ("------------");
     
     string[] readText = File.ReadAllLines(path);
     int counterPrint = 1;
@@ -131,7 +135,7 @@ class LoginPass{
     Console.WriteLine ("=======================================");
     try{
       
-      Console.Write("Choose Sentence to delete(Press enter to return):");
+      Console.Write("Choose User to delete(Press enter to return):");
       
       int choiceDelete = Convert.ToInt32(Console.ReadLine());
       
@@ -147,7 +151,7 @@ class LoginPass{
       Console.Clear();
       DeleteUser();
     }
-    Console.Write("Enter: ");
+
     Console.ReadKey();
     Console.Clear();
     Judical.UserInfo();
@@ -181,6 +185,7 @@ class LoginPass{
           break;
           
         default:
+          Console.Clear();
           Login();
           break;
   
@@ -219,7 +224,6 @@ class LoginPass{
               break;
             }
           }
-          Console.WriteLine(checkLine);
           if(checkLine == 0){
             found++;
             break;
@@ -286,6 +290,7 @@ class LoginPass{
           break;
           
         default:
+          Console.Clear();
           Reg();
           break;
   
@@ -388,7 +393,9 @@ class LoginPass{
         case 3:
           Environment.Exit(0);
           break;
+          
         default:
+          Console.Clear();
           MainSignIn();
           break;
           
