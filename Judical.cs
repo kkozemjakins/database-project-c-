@@ -4,14 +4,17 @@ using System.Linq;
 
 class Judical
 {
-    public static Int32 NumberRewriter(int number, int difference){
+    
+  
+  public static Int32 NumberRewriter(int number, int difference){
       int Base = 1;
       for(int i = 0; i < number-1; i++){
         Base = Base + difference;
       }
       return Base;
-    }
-    public static void AddData(){
+  }
+  public static void AddData(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -54,7 +57,7 @@ class Judical
         
       case 4:
         Console.Clear();
-        if(LoginPass.Roots == 1){
+        if(Convert.ToInt32(UserRoots[0]) == 1){
           MainMenu();
         }
         else{
@@ -76,6 +79,7 @@ class Judical
 
  /////////////////////////////////// 
   public static void ViewData(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -118,7 +122,7 @@ class Judical
         
       case 4:
         Console.Clear();
-        if(LoginPass.Roots == 1){
+        if(Convert.ToInt32(UserRoots[0]) == 1){
           MainMenu();
         }
         else{
@@ -140,6 +144,7 @@ class Judical
 
 /////////////////////////////////////////////  
   public static void DeleteData(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -183,7 +188,7 @@ class Judical
       case 4:
         Console.Clear();
         Console.Clear();
-        if(LoginPass.Roots == 1){
+        if(Convert.ToInt32(UserRoots[0]) == 1){
           MainMenu();
         }
         else{
@@ -205,6 +210,7 @@ class Judical
 
 ////////////////////////////////////  
   public static void SearchData(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -247,8 +253,7 @@ class Judical
         
       case 4:
         Console.Clear();
-        Console.Clear();
-        if(LoginPass.Roots == 1){
+        if(Convert.ToInt32(UserRoots[0]) == 1){
           MainMenu();
         }
         else{
@@ -270,6 +275,7 @@ class Judical
 
 ////////////////////////////////////////////////  
   public static void ObjectsNum(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     string[] TextConvicted = File.ReadAllLines(Convicted.path);
     string[] TextCase = File.ReadAllLines(Case.path);
     string[] TextSentence = File.ReadAllLines(Sentence.path);
@@ -305,7 +311,7 @@ class Judical
     Console.Write("Enter: ");
     Console.ReadKey();
     Console.Clear();
-    if(LoginPass.Roots == 1){
+    if(Convert.ToInt32(UserRoots[0]) == 1){
       MainMenu();
     }
     else{
@@ -315,6 +321,7 @@ class Judical
   }
   ////////////////////////////////////////////////////
   public static void Sort(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -357,7 +364,7 @@ class Judical
         
       case 4:
         Console.Clear();
-        if(LoginPass.Roots == 1){
+        if(Convert.ToInt32(UserRoots[0]) == 1){
           MainMenu();
         }
         else{
@@ -379,6 +386,7 @@ class Judical
   }
 /////////////////////////////////////////////////////
   public static void Summary(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -397,7 +405,7 @@ class Judical
         counterPrint++;
     }
     Console.WriteLine ("=======================================");
-    Console.Write("Enter(Press ENTERN to return): ");
+    Console.Write("Enter(Press ENTER to return): ");
     try{
       int choice = Convert.ToInt32(Console.ReadLine());
       choice = NumberRewriter(choice,8)-1;
@@ -466,7 +474,7 @@ class Judical
     }
     catch{
       Console.Clear();
-      if(LoginPass.Roots == 1){
+      if(Convert.ToInt32(UserRoots[0]) == 1){
         MainMenu();
       }
       else{
@@ -475,7 +483,7 @@ class Judical
     }
     Console.ReadKey();
     Console.Clear();
-    if(LoginPass.Roots == 1){
+    if(Convert.ToInt32(UserRoots[0]) == 1){
       MainMenu();
     }
     else{
@@ -484,6 +492,7 @@ class Judical
   }
 ////////////////////////////////////////////////////
   public static void UserInfo(){
+    string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
     Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
@@ -517,7 +526,7 @@ class Judical
           
         case 4:
           Console.Clear();
-          if(LoginPass.Roots == 1){
+          if(Convert.ToInt32(UserRoots[0]) == 1){
             MainMenu();
           }
           else{
@@ -670,12 +679,12 @@ class Judical
   
       case 3:
         Console.Clear();
-        Summary();
+        Sort();
         break;
         
       case 4:
         Console.Clear();
-        Sort();
+        Summary();
         break;
         
       case 5:

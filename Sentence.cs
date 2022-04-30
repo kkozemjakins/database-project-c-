@@ -201,6 +201,14 @@ class Sentence{
       }
       
       int counterPrint = 0;
+      
+      Console.Clear();
+      Console.WriteLine ("=======================================");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ($"Search data({path}):");      
+      
       string readLine = counter.ToString();
       using (StreamReader sr = new StreamReader(path))
       {
@@ -220,6 +228,8 @@ class Sentence{
         }
         
       }
+      Console.WriteLine ("=======================================");
+
     }
 
     catch (Exception)

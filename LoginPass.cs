@@ -258,9 +258,6 @@ class LoginPass{
     MainSignIn();
     
   }
-  static string[] UserRoots = File.ReadAllLines("CurrentUserRoots.txt");
-  
-  public static int Roots = Convert.ToInt32(UserRoots[0]);
   
   public static void Reg(){
     Console.WriteLine ("=======================================");
