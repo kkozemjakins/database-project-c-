@@ -1,11 +1,3 @@
-Case 1
-24/04/2022
-19:42:00
-Mego
-Kirils Ivandes
-123456-12345
-12/34/5678
-Ukral
 Case 2
 25/04/2022
 20:42:00
@@ -13,12 +5,4 @@ Maxima
 Denis Kozlovs
 170805-22707
 17/08/2005
-Stole
-Case 3
-25/04/2022
-20:42:00
-Maxima
-Kirils Ivandes
-123456-12345
-12/34/5678
 Stole

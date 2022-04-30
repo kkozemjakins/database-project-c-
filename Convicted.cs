@@ -4,6 +4,8 @@ using System.Linq;
 
 class Convicted{
   public static string path = "convicted.txt";
+
+  static string[] titles = {"Convicted name:","Personal code:","Date of birth:"};
   
   public static void AddData(){
     string Name;
@@ -77,10 +79,10 @@ class Convicted{
     Console.WriteLine ("=======================================");
     Console.Write("Enter: ");
     int choice = 0;
-    counterPrint = 1;
+    counterPrint = 0;
     try{
       choice = Convert.ToInt32(Console.ReadLine());
-      choice = Judical.NumberRewriter(choice,3)-1;
+      choice = Judical.NumberRewriter(choice,3) - 1;
       
       Console.Clear();
       
@@ -89,12 +91,10 @@ class Convicted{
       Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
       Console.WriteLine ("---------------------------------------");
       Console.WriteLine ($"View data({readText[choice]} - {path}):");
-      Console.Write($"- o - {readText[choice]}\n");
-      for(int i = choice + 1; i < choice + 3; i++)
+      for(int i = choice; i < choice + 3; i++)
       {
           
-          Console.WriteLine($"- | - {readText[i]}");
-          counterPrint++;
+          Console.WriteLine($"- | {titles[i]} {readText[i]}");
       }
       Console.WriteLine ("=======================================");
     }
@@ -105,7 +105,7 @@ class Convicted{
       ViewData();
     }
   }
-  
+  ////////////////////DeleteData///////////////////////
   public static void DeleteData(){
     Console.WriteLine ("=======================================");
     Console.WriteLine ("---------------------------------------");
@@ -121,7 +121,7 @@ class Convicted{
     {
         
         Console.WriteLine($"- {counterPrint} - {readText[i]} - {readText[i+1]}");
-        counterPrint+=3;
+        counterPrint++;
     }
     Console.WriteLine ("=======================================");
     try{
@@ -136,9 +136,7 @@ class Convicted{
       string line;
       int counter = 0;
       var text = readText[choiceDelete];
-      int found = 0;
-      
-      
+       
       
  /////////////////////////////////////////////////////
   
@@ -147,16 +145,10 @@ class Convicted{
       {
           if (line.Contains(text))
           {
-            Console.WriteLine($"case txt:{counter}");
             counter = counter - 5;
-            //found = 3;
-            Console.WriteLine($"case txt:{counter}");
             for(int i = 0; i<8; i++){
               TextCase = TextCase.Where((source, index) =>index != counter).ToArray();
               File.WriteAllLines("case.txt", TextCase);
-              Console.Write("Enter: ");
-              Console.ReadKey();
-
 
             }
             counter = 0;
@@ -175,22 +167,17 @@ class Convicted{
       /////////////////////////////////
 
 
-      found = 0;
       counter = 0;
       System.IO.StreamReader fileSentence = new System.IO.StreamReader("sentence.txt");
       while ((line = fileSentence.ReadLine()) != null)
       {
           if (line.Contains(text))
           {
-            Console.WriteLine($"sentence txt:{counter}");
-            counter = counter - 5 - found;
-            found = 6;
-            Console.WriteLine($"sentence txt:{counter}");
+            counter = counter - 5;
             for(int i = 0; i<11; i++){
               TextSentence = TextSentence.Where((source, index) =>index != counter).ToArray();
               File.WriteAllLines("sentence.txt", TextSentence);
-              Console.Write("Enter: ");
-              Console.ReadKey();
+
             }
             fileSentence = new System.IO.StreamReader("sentence.txt");
             counter = 0;
@@ -213,7 +200,7 @@ class Convicted{
       Console.Clear();
       Judical.DeleteData();
     }
-    //Console.Clear();
+    Console.Clear();
     DeleteData();
     
   }
@@ -237,13 +224,13 @@ class Convicted{
           }
           counter = counter + 1 ;
       }
-      int checker = counter;
+      int ReadTextLength = counter;
       
-      while(checker != 0 && checker !=1 && checker != 2){
-        checker = checker - 3;
-        Console.WriteLine(checker);
-        if(checker < 0){
-          Environment.Exit(0);
+      while(ReadTextLength > 0){
+        ReadTextLength = ReadTextLength - 3;
+        Console.WriteLine(ReadTextLength);
+        if(ReadTextLength >= 0 && ReadTextLength <= 2){
+          break;
         }
       }
       
@@ -253,24 +240,17 @@ class Convicted{
       {
         string[] lines = File.ReadAllLines(path);
 
-        
-        if(checker == 0){
-          for(int i = 0; i < 3; i++){
-            Console.WriteLine(lines[counter + i]);
+        for(int i = 0; i < 3; i++){
+          
+          if(ReadTextLength == i){
+            
+            for(int n = -i; n < 3 - ReadTextLength; n++){
+              
+              Console.WriteLine(lines[counter + n]);
+            }
+            
           }
         }
-
-        if(checker == 1){
-          for(int i = -1; i < 2; i++){
-            Console.WriteLine(lines[counter + i]);
-          }
-        }        
-
-        if(checker == 2){
-          for(int i = -2; i < 1; i++){
-            Console.WriteLine(lines[counter + i]);
-          }
-        }  
         
       }
     }
@@ -281,4 +261,85 @@ class Convicted{
       Console.WriteLine("The file does not contain what you are looking for, try changing the letter case");
     }
   }
+  ////////////////////////////////////////////////////
+  public static void Sort(){
+    Console.WriteLine ("=======================================");
+    Console.WriteLine ("---------------------------------------");
+    Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
+    Console.WriteLine ("---------------------------------------");
+    Console.WriteLine ("Sort data({path}):");
+    Console.WriteLine ("- 1 - A-Z ");
+    Console.WriteLine ("- 2 - Z-A ");
+    Console.WriteLine ("- 3 - Back ");
+    Console.WriteLine ("=======================================");
+    Console.Write("Enter: ");
+    
+    string[] readText = File.ReadAllLines(path);
+
+    int ReadTextLength = readText.Length;
+    
+    string[] ConvictedSort = new string[ReadTextLength/3];
+    
+    int n = 0;
+
+    for(int i = 0; i < readText.Length; i+=3){
+      
+      ConvictedSort[n] = readText[i] + " " +readText[i+1];
+
+      n++;
+      
+    }
+
+
+
+    try{
+      int choice = Convert.ToInt32(Console.ReadLine());
+
+      Console.Clear();
+      Console.WriteLine ("=======================================");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ("JUDICIAL INFORMATION SYSTEM");
+      Console.WriteLine ("---------------------------------------");
+      Console.WriteLine ($"Sort data({path}):");
+      
+      switch(choice){
+        case 1:
+          Array.Sort(ConvictedSort);
+          
+          foreach (string people in ConvictedSort)
+          {
+            Console.WriteLine($"- | - {people}");
+          }
+          
+          break;
+    
+        case 2:
+          Array.Sort(ConvictedSort);
+
+          Array.Reverse(ConvictedSort);
+          
+          foreach (string people in ConvictedSort)
+          {
+            Console.WriteLine($"- | - {people}");
+          }
+          break;
+        case 3:
+          Judical.Sort();
+          break;
+
+        default:
+          Sort();
+          break;
+
+      }
+    }
+    catch (Exception)
+    {
+      // Let the user know what went wrong.
+      Console.Clear();
+      Sort();
+    }
+    Console.WriteLine ("=======================================");
+  }
+  
 }
