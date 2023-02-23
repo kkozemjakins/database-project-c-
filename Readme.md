@@ -3,9 +3,8 @@
 ### Grupa:
 DP2-1
 
-### Autori:
+### Autors:
 * Kirils Kožemjakins
-* Deniss Kozlovs
 
 ### Repl:
 It's best to run the program in Replit
